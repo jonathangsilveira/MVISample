@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MVISample</string>
+    <string name="discover">DISCOVER</string>
+    <string name="upcoming">UPCOMING</string>
+    <string name="error">Error</string>
+    <string name="ok">OK</string>
+</resources>
