@@ -40,7 +40,7 @@ class MovieFragment : Fragment() {
     }
 
     private fun render(state: State) {
-        loading.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        loading.visibility= if (state.isLoading) View.VISIBLE else View.GONE
         discover.adapter = MovieAdapter(state.discover)
         displayError(state)
     }
