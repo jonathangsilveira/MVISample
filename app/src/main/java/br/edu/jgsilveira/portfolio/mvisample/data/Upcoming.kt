@@ -18,7 +18,8 @@ data class Upcoming(
         @SerializedName("vote_count")
         val voteCount: Int,
         @SerializedName("vote_average")
-        val voteAverage: Double
+        val voteAverage: Double,
+        val title: String
     )
 
     data class Dates(
