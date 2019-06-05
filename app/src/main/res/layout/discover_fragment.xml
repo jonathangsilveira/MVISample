@@ -16,13 +16,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent">
 
-        <ToggleButton
+        <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/toggleButton"
-                android:textOff="@string/discover"
-                android:textOn="@string/upcoming"
-                android:checked="false"
+                style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
+                app:itemIconTint="@color/bottom_navigation_state"
+                app:itemTextColor="@color/bottom_navigation_state"
+                app:menu="@menu/movie_menu"
                 android:layout_gravity="bottom"/>
 
         <androidx.recyclerview.widget.RecyclerView

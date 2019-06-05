@@ -28,11 +28,18 @@ class MovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         discover.setup()
-        toggleButton.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked)
-                viewModel.upcoming()
-            else
-                viewModel.discover()
+        toggleButton.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.action_upcoming -> {
+                    viewModel.upcoming()
+                    true
+                }
+                R.id.action_discover -> {
+                    viewModel.discover()
+                    true
+                }
+                else -> false
+            }
         }
         viewModel.viewState.observe(viewLifecycleOwner) { state ->
             render(state)
