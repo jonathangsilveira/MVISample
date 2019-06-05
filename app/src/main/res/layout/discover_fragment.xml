@@ -8,36 +8,41 @@
         android:layout_height="match_parent"
         tools:context=".movie.MovieActivity">
 
-    <FrameLayout
+    <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:theme="?attr/actionBarTheme"
+            android:minHeight="?attr/actionBarSize" android:id="@+id/toolbar"
+            app:title="@string/main"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/discover"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            tools:listitem="@layout/movie_item"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintBottom_toTopOf="@+id/toggleButton"/>
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/toggleButton"
-                style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
-                app:itemIconTint="@color/bottom_navigation_state"
-                app:itemTextColor="@color/bottom_navigation_state"
-                app:menu="@menu/movie_menu"
-                android:layout_gravity="bottom"/>
+    <include android:id="@+id/loading"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:visibility="visible"
+             android:visibility="gone"
+             layout="@layout/loading_layout"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/discover"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" tools:listitem="@layout/movie_item"/>
-
-        <include android:id="@+id/loading"
-                 android:layout_width="match_parent"
-                 android:layout_height="match_parent"
-                 tools:visibility="visible"
-                 android:visibility="gone"
-                 layout="@layout/loading_layout"/>
-
-    </FrameLayout>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/toggleButton"
+            style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
+            app:itemIconTint="@color/bottom_navigation_state"
+            app:itemTextColor="@color/bottom_navigation_state"
+            app:menu="@menu/movie_menu"
+            android:layout_gravity="bottom"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
