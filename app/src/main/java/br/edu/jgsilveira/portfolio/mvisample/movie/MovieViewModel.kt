@@ -22,18 +22,6 @@ class MovieViewModel(
         }
     }
 
-    /*val viewState: LiveData<State> = Transformations.map(dispatcher.dispatch(Action.DISCOVER)) {
-        when (it) {
-            is Result.Loading -> state.copy(isLoading = true)
-            is Result.Success<*> -> {
-                it.value as DiscoverMovies?
-                state.copy(isLoading = false, discover = it.value)
-            }
-            is Result.Failure.Response -> state.copy(isLoading = false, error = it.message)
-            is Result.Failure.Undefined -> state.copy(isLoading = false, error = it.cause.message)
-        }
-    }*/
-
     val viewState: LiveData<State> = Transformations.switchMap(action) { action ->
         Transformations.map(dispatcher.dispatch(action)) {
             when (it) {
