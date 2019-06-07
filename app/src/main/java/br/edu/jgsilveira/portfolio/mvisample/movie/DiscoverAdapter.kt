@@ -5,10 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.edu.jgsilveira.portfolio.mvisample.R
-import br.edu.jgsilveira.portfolio.mvisample.data.DiscoverMovies
+import br.edu.jgsilveira.portfolio.mvisample.data.Discover
 import kotlinx.android.synthetic.main.movie_item.view.*
 
-class DiscoverAdapter(private val discover: DiscoverMovies?): RecyclerView.Adapter<DiscoverAdapter.MovieHolder>() {
+class DiscoverAdapter(private val discover: Discover?): RecyclerView.Adapter<DiscoverAdapter.MovieHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieHolder {
         val view = LayoutInflater

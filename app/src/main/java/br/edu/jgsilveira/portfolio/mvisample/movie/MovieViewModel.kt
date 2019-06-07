@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import br.edu.jgsilveira.portfolio.mvisample.data.DiscoverMovies
+import br.edu.jgsilveira.portfolio.mvisample.data.Discover
 import br.edu.jgsilveira.portfolio.mvisample.data.Result
 import br.edu.jgsilveira.portfolio.mvisample.data.Upcoming
 
@@ -28,7 +28,7 @@ class MovieViewModel(
                 is Result.Loading -> state.copy(isLoading = true)
                 is Result.Success<*> -> {
                     when (it.value) {
-                        is DiscoverMovies -> state.copy(isLoading = false, discover = it.value)
+                        is Discover -> state.copy(isLoading = false, discover = it.value)
                         is Upcoming -> state.copy(isLoading = false, upcoming = it.value)
                         else -> state.copy(isLoading = false)
                     }

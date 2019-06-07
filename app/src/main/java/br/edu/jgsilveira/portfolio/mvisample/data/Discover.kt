@@ -5,20 +5,18 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Upcoming(
+data class Discover(
     val page: Int,
     val results: List<Result>,
-    val dates: Dates,
-    @SerialName("total_pages")
-    val totalPages: Int,
     @SerialName("total_results")
-    val totalResults: Int
+    val totalResults: Int,
+    @SerialName("total_pages")
+    val totalPages: Int
 ) {
-
     @Serializable
     data class Result(
         @SerialName("poster_path")
-        val posterPath: String,
+        val posterPath: String?,
         val adult: Boolean,
         val overview: String,
         @SerialName("release_date")
@@ -32,7 +30,7 @@ data class Upcoming(
         val originalLanguage: String,
         val title: String,
         @SerialName("backdrop_path")
-        val backdropPath: String,
+        val backdropPath: String?,
         val popularity: Double,
         @SerialName("vote_count")
         val voteCount: Int,
@@ -40,11 +38,4 @@ data class Upcoming(
         @SerialName("vote_average")
         val voteAverage: Double
     )
-
-    @Serializable
-    data class Dates(
-        val maximum: String,
-        val minimum: String
-    )
-
 }

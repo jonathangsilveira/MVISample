@@ -12,9 +12,9 @@ class MovieRepoImpl(private val endPoint: MovieEndPoint) : MovieRepo {
         emit(endPoint.upcoming())
     }
 
-    override fun discover(queries: Map<String, String>) = liveData(Dispatchers.IO) {
+    override fun discover() = liveData(Dispatchers.IO) {
         emit(loading())
-        emit(endPoint.discover(queries))
+        emit(endPoint.discover())
     }
 
 }

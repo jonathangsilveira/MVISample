@@ -4,8 +4,8 @@ class MovieEndPoint : BaseEndPoint() {
 
     private val service: DiscoverService by service()
 
-    fun discover(queries: Map<String, String> = mapOf()) = safeApiCall {
-        service.discover(queries)
+    fun discover() = safeApiCall {
+        service.discover()
     }
 
     fun upcoming() = safeApiCall {

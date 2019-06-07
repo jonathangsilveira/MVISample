@@ -5,7 +5,7 @@ import br.edu.jgsilveira.portfolio.mvisample.data.Result
 
 interface MovieRepo {
 
-    fun discover(queries: Map<String, String> = mapOf()): LiveData<Result>
+    fun discover(): LiveData<Result>
 
     fun upcoming(): LiveData<Result>
 
