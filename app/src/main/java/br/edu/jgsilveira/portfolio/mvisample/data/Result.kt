@@ -1,14 +1,12 @@
 package br.edu.jgsilveira.portfolio.mvisample.data
 
-sealed class Result {
+sealed class Result<out T> {
 
-    object Loading : Result()
+    data class Success<out T>(val value: T?) : Result<T>()
 
-    data class Success<T>(val value: T) : Result()
+    sealed class Failure: Result<Nothing>() {
 
-    sealed class Failure: Result() {
-
-        data class Response(val code: Int, val message: String): Failure()
+        data class Response<T: ApiError>(val code: Int, val message: String, val body: T? = null): Failure()
 
         data class Undefined(val cause: Throwable): Failure()
 
@@ -16,10 +14,8 @@ sealed class Result {
 
 }
 
-fun loading() = Result.Loading
-
 fun <T> success(value: T) = Result.Success(value)
 
-fun response(code: Int, message: String) = Result.Failure.Response(code, message)
+fun <T: ApiError> response(code: Int, message: String, body: T? = null) = Result.Failure.Response(code, message, body)
 
 fun undefined(cause: Throwable) = Result.Failure.Undefined(cause)

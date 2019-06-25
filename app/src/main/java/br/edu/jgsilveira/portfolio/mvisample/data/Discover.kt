@@ -2,7 +2,7 @@ package br.edu.jgsilveira.portfolio.mvisample.data
 
 import com.google.gson.annotations.SerializedName
 
-data class DiscoverMovies(
+data class Discover(
         val page: Int,
         val results: List<Result>,
         @SerializedName("total_results")

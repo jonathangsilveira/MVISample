@@ -5,9 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import br.edu.jgsilveira.portfolio.mvisample.data.DiscoverMovies
+import br.edu.jgsilveira.portfolio.mvisample.data.ActionState
 import br.edu.jgsilveira.portfolio.mvisample.data.Result
-import br.edu.jgsilveira.portfolio.mvisample.data.Upcoming
 
 class MovieViewModel(
     application: Application,
@@ -25,17 +24,20 @@ class MovieViewModel(
     val viewState: LiveData<State> = Transformations.switchMap(action) { action ->
         Transformations.map(dispatcher.dispatch(action)) {
             when (it) {
-                is Result.Loading -> state.copy(isLoading = true)
-                is Result.Success<*> -> {
-                    when (it.value) {
-                        is DiscoverMovies -> state.copy(isLoading = false, discover = it.value)
-                        is Upcoming -> state.copy(isLoading = false, upcoming = it.value)
-                        else -> state.copy(isLoading = false)
-                    }
-                }
-                is Result.Failure.Response -> state.copy(isLoading = false, error = it.message)
-                is Result.Failure.Undefined -> state.copy(isLoading = false, error = it.cause.message)
+                is ActionState.Loading -> state.copy(isLoading = true)
+                is ActionState.DiscoverLoaded -> state.copy(isLoading = false, discover = it.value)
+                is ActionState.UpcomingLoaded -> state.copy(isLoading = false, upcoming = it.value)
+                is ActionState.Error -> handleError(it)
             }
+        }
+    }
+
+    private fun handleError(state: ActionState.Error): State {
+        return when (state.failure) {
+            is Result.Failure.Response<*> -> {
+                this.state.copy(isLoading = false, error = state.failure.body?.statusMessage)
+            }
+            is Result.Failure.Undefined -> this.state.copy(isLoading = false, error = state.failure.cause.message)
         }
     }
 
