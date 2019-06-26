@@ -16,9 +16,9 @@ class MovieRepoImpl(private val endPoint: MovieEndPoint) : MovieRepo {
         }
     }
 
-    override fun discover(queries: Map<String, String>) = liveData(Dispatchers.IO) {
+    override fun discover() = liveData(Dispatchers.IO) {
         emit(ActionState.Loading)
-        when (val result = endPoint.discover(queries)) {
+        when (val result = endPoint.discover()) {
             is Result.Success -> emit(ActionState.DiscoverLoaded(result.value))
             is Result.Failure -> emit(ActionState.Error(result))
         }

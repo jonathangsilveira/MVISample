@@ -29,24 +29,24 @@ open class BaseEndPoint {
         val result = call().execute()
         when {
             result.isSuccessful -> success(result.body())
-            result.code() == 401 -> result.unauthorized()
-            result.code() == 404 -> result.notFound()
+            result.code() == 401 -> unauthorized(result)
+            result.code() == 404 -> notFound(result)
             else -> response(code = result.code(), message = result.message(), body = null)
         }
     } catch (e: Exception) {
         undefined(e)
     }
 
-    private fun <T> Response<T>.unauthorized(): Result.Failure.Response<Unauthorized> {
-        val json = errorBody()?.string()
+    private fun <T> unauthorized(result: Response<T>): Result.Failure.Response<Unauthorized> {
+        val json = result.errorBody()?.string()
         val unauthorized = Gson().fromJson(json, Unauthorized::class.java)
-        return response(code(), message(), unauthorized)
+        return response(result.code(), result.message(), unauthorized)
     }
 
-    private fun <T> Response<T>.notFound(): Result.Failure.Response<NotFound> {
-        val json = errorBody()?.string()
+    private fun <T> notFound(result: Response<T>): Result.Failure.Response<NotFound> {
+        val json = result.errorBody()?.string()
         val notFound = Gson().fromJson(json, NotFound::class.java)
-        return response(code(), message(), notFound)
+        return response(result.code(), result.message(), notFound)
     }
 
     private fun createClient(): OkHttpClient {
@@ -63,7 +63,7 @@ open class BaseEndPoint {
         val request = chain.request()
         val url = request.url()
             .newBuilder()
-            //.addQueryParameter("api_key", BuildConfig.TMDB_API_KEY)
+            .addQueryParameter("api_key", BuildConfig.TMDB_API_KEY)
             .build()
         val newRequest = request.newBuilder()
             .url(url)
