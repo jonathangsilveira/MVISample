@@ -1,6 +1,5 @@
 package br.edu.jgsilveira.portfolio.mvisample.api
 
-import br.edu.jgsilveira.portfolio.mvisample.BuildConfig
 import br.edu.jgsilveira.portfolio.mvisample.data.*
 import com.google.gson.Gson
 import okhttp3.Interceptor
@@ -63,7 +62,7 @@ open class BaseEndPoint {
         val request = chain.request()
         val url = request.url()
             .newBuilder()
-            .addQueryParameter("api_key", BuildConfig.TMDB_API_KEY)
+            .addQueryParameter("api_key", "b5608c7fcd15576edfe8564a93c3c451")
             .build()
         val newRequest = request.newBuilder()
             .url(url)
