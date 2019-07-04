@@ -25,7 +25,7 @@ android {
         targetCompatibility = '1.8'
     }
     buildToolsVersion = '28.0.3'
-    buildTypes.each {
+    /*buildTypes.each {
         Properties properties = new Properties()
         properties.load(project.rootProject.file("local.properties").newDataInputStream())
         def tmdbApiKey = properties.getProperty("tmdb.api_key", "")
@@ -33,7 +33,7 @@ android {
         it.buildConfigField 'String', "TMDB_API_KEY", tmdbApiKey
 
         it.resValue 'string', "api_key", tmdbApiKey
-    }
+    }*/
 }
 
 dependencies {
